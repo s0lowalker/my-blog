@@ -1,0 +1,36 @@
+{{ define "main" }}
+<article class="markdown book-article">
+  <h1>文档</h1>
+  <div class="homepage-tree">
+    {{ $bookSection := default "docs" .Site.Params.BookSection }}
+    {{ with .Site.GetPage $bookSection }}
+      {{ template "home-tree" (dict "Section" . "CurrentPage" $) }}
+    {{ end }}
+  </div>
+</article>
+{{ end }}
+
+{{ define "home-tree" }}
+  <ul class="home-tree-list">
+    {{ range (where .Section.Pages "Params.bookHidden" "ne" true) }}
+      {{ if .IsSection }}
+        <li>
+          <span class="home-tree-toggle collapsed"></span>
+          <span class="home-section-label">{{ .Title }}</span>
+          <div class="home-tree-children hidden">
+            {{ template "home-tree" (dict "Section" . "CurrentPage" $.CurrentPage) }}
+          </div>
+        </li>
+      {{ else if .Content }}
+        <li>
+          <div class="home-tree-item">
+            <span class="home-tree-spacer"></span>
+            <a href="{{ .RelPermalink }}" class="home-article-link" data-summary="{{ .Summary | plainify }}">{{ .Title }}</a>
+            <span class="home-tree-line"></span>
+            <span class="home-tree-date">{{ .Date.Format "2006-01-02" }}</span>
+          </div>
+        </li>
+      {{ end }}
+    {{ end }}
+  </ul>
+{{ end }}

@@ -1,0 +1,9 @@
+- name: "moyue"
+  url: "https://qmoyue.github.io/"
+  avatar: "https://qmoyue.github.io/_astro/avatar.CH-3W-fq.jpg"
+  desc: "web安全大手子"
+
+- name: "Snowcat"
+  url: "https://sadsnowcat.com/"
+  avatar: "https://sadsnowcat.com/images/head.jpg"
+  desc: "pwn大手子"

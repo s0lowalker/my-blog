@@ -1,0 +1,61 @@
+<script>
+(function() {
+  // Tree toggle on homepage
+  var tree = document.querySelector('.homepage-tree');
+  if (tree) {
+    tree.addEventListener('click', function(e) {
+      var toggle = e.target.closest('.home-tree-toggle');
+      var label = e.target.closest('.home-section-label');
+      var target = toggle || label;
+      if (!target) return;
+
+      var li = target.closest('li');
+      if (!li) return;
+
+      var children = li.querySelector('.home-tree-children');
+      var toggleIcon = li.querySelector('.home-tree-toggle');
+      if (!children || !toggleIcon) return;
+
+      e.preventDefault();
+      if (children.classList.contains('hidden')) {
+        children.classList.remove('hidden');
+        toggleIcon.classList.remove('collapsed');
+        toggleIcon.classList.add('expanded');
+      } else {
+        children.classList.add('hidden');
+        toggleIcon.classList.remove('expanded');
+        toggleIcon.classList.add('collapsed');
+      }
+    });
+  }
+
+  // Tooltip for article links with data-summary
+  var tooltip = document.createElement('div');
+  tooltip.className = 'preview-tooltip';
+  document.body.appendChild(tooltip);
+  var timer;
+
+  document.querySelectorAll('.home-article-link[data-summary]').forEach(function(link) {
+    link.addEventListener('mouseenter', function(e) {
+      if (window.innerWidth <= 768) return;
+      var summary = link.getAttribute('data-summary');
+      if (!summary) return;
+      timer = setTimeout(function() {
+        var text = summary.length > 200 ? summary.substring(0, 200) + '...' : summary;
+        tooltip.textContent = text;
+        tooltip.style.display = 'block';
+        var x = e.clientX + 15;
+        var y = e.clientY + 15;
+        if (x + 420 > window.innerWidth) x = e.clientX - 420 - 15;
+        if (y + 100 > window.innerHeight) y = e.clientY - 100;
+        tooltip.style.left = x + 'px';
+        tooltip.style.top = y + 'px';
+      }, 500);
+    });
+    link.addEventListener('mouseleave', function() {
+      clearTimeout(timer);
+      tooltip.style.display = 'none';
+    });
+  });
+})();
+</script>

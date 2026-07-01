@@ -1,0 +1,13 @@
+<header class="top-header">
+  <div class="top-header-inner">
+    <div class="top-header-left">
+      <a href="{{ .Site.Home.Permalink }}" class="top-header-title">{{ .Site.Title }}</a>
+    </div>
+    <div class="top-header-right">
+      <a href="{{ "friends" | relURL }}">友链</a>
+      {{ range .Site.Params.navLinks }}
+        <a href="{{ .url }}" target="_blank" rel="noopener">{{ .name }}</a>
+      {{ end }}
+    </div>
+  </div>
+</header>
