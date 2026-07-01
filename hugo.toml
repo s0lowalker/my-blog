@@ -1,6 +1,6 @@
 baseURL = 'https://s0lowalker.github.io/'
 languageCode = 'zh-cn'
-title = 'S0lowalker'
+title = 'Solowalker'
 theme = 'hugo-book'
 
 [params]
