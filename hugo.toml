@@ -5,7 +5,7 @@ theme = 'hugo-book'
 
 [params]
   BookTheme = 'auto'
-  # BookLogo = ''
+  BookLogo = '/images/logo/solowalker.png'
   BookSection = 'docs'
 
 # 导航链接

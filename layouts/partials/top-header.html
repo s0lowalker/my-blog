@@ -1,6 +1,9 @@
 <header class="top-header">
   <div class="top-header-inner">
     <div class="top-header-left">
+      {{ if .Site.Params.BookLogo }}
+        <img src="{{ .Site.Params.BookLogo | relURL }}" alt="Logo" class="top-header-logo" />
+      {{ end }}
       <a href="{{ .Site.Home.Permalink }}" class="top-header-title">{{ .Site.Title }}</a>
     </div>
     <div class="top-header-right">
