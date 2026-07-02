@@ -1,14 +1,6 @@
 ---
 title: java反序列化之CB
 date: 2026-05-21
-tags: 
-  - java安全
-  - 反序列化专题
-  - CB链
-categories: 
-  - web安全
-  - java安全
-excerpt: java反序列化之CB
 ---
 
 # java反序列化之CB
