@@ -12,3 +12,23 @@
   url: "https://hey-chloe.github.io"
   #avatar: ""
   desc: "web学姐"
+
+- name: "Yuoooka"
+  url: "https://yuoooka.cn/"
+  avatar: "https://yuoooka.cn/api/picture?id=b_457bd718905b17ac0d06059d9a11c590.jpg"
+  desc: "逆向与开发"
+
+- name: "Nick"
+  url: "https://www.nickchen.top/"
+  avatar: "https://www.nickchen.top/_astro/avatar.CHzblvB9_Z1zfM1w.webp"
+  desc: "前端安全专家"
+
+- name: "Gu007"
+  url: "https://gu-007.github.io/"
+  avatar: "https://gu-007.github.io/img/avatar.svg"
+  desc: "web安全学习者"
+
+- name: "wuye"
+  url: "https://www.mgoyy.cn/"
+  avatar: "https://www.mgoyy.cn/images/b0c1d74766dd8bce0ad860be15c46993a.jpg"
+  desc: "wuye魔法师"
