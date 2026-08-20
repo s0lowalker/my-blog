@@ -1,11 +1,73 @@
 ---
 title: JS应用
-date: 2026-07-02
+date: 2026-08-04
 ---
 
 # JS 应用
 
 ## Ajax 技术
+
+Ajax 全称异步 Javascript 和 XML，这一项技术主要是用来发送 HTTP 请求的。
+
+Ajax 允许通过与场景后面的 Web 服务器交换数据来异步更新网页。这意味着可以更新网页的部分，而不需要重新加载整个页面。
+
+### Ajax 如何工作
+
+![ajax工作流程图](https://www.w3school.com.cn/i/ajax.gif)
+
+1. 网页中发生一个事件（页面加载、按钮点击）
+2. 由 JavaScript 创建 XMLHttpRequest 对象
+3. XMLHttpRequest 对象向 web 服务器发送请求
+4. 服务器处理该请求
+5. 服务器将响应发送回网页
+6. 由 JavaScript 读取响应
+7. 由 JavaScript 执行正确的动作（比如更新页面）
+
+### 3种 Ajax 技术
+
+1. 原生 Ajax
+
+```js
+var xhttp = new XMLHttpRequest();
+	xhttp.open("GET", "./1.txt", true);
+	xhttp.send();
+	xhttp.onreadystatechange = function() {
+		if (this.readyState == 4 && this.status == 200) {
+		document.getElementById("content").innerHTML = this.responseText;
+	}
+};
+```
+
+2. jQuery 库
+
+```js
+$.ajax({
+	method: "GET",
+	url: "1.txt",
+	dataType: "text",
+	success: function(data) {
+	document.write(data);
+	}
+});
+```
+
+3. Axios 库
+
+```js
+axios({
+	method:'GET',
+	url:'1.txt,
+	dataType:'text',
+}).then(function(response){
+		console.log(response.data);
+	})
+//或者下面这种更简单的写法
+axios.get('1.txt').then(function(response){
+     console.log(response.data);
+})
+```
+
+目前主流的 Ajax 技术是 jQuery 库和 Axios 库。
 
 ## BOM 浏览器对象
 
