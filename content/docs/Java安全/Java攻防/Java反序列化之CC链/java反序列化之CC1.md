@@ -1,3 +1,8 @@
+---
+title:  Java反序列化之CC1
+date: 2026-05-06
+---
+
 # Java反序列化之CC1
 
 ## TransformMap版CC1攻击链分析
