@@ -9,7 +9,7 @@ date: 2026-08-21
 
 在登录时勾选 RememberMe 字段，登录成功之后返回包的`set-Cookie`中会有`rememberMe=deleteMe`字段，同时也会有`rememberMe`字段，之后所有的请求中 Cookie 都会有 rememberMe 字段，就可以利用这个`rememberMe`进行反序列化从而 getshell。
 
-![屏幕截图 2026-08-21 202837](/images/screenshots/屏幕截图 2026-08-21 202837.png)
+![屏幕截图 2026-08-21 202837](/images/screenshots/屏幕截图%202026-08-21%20202837.png)
 
 Shiro1.2.4 及之前的版本中，AES 加密的密钥默认**硬编码**在代码里（Shiro-550），Shiro 1.2.4 以上版本官方移除了代码中的默认密钥，要求开发者自己设置，如果开发者没有设置，则默认动态生成，降低了固定密钥泄漏的风险。
 

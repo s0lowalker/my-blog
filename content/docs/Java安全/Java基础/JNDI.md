@@ -601,7 +601,7 @@ public class JNDIBypassHighJavaClient {
 
 断点打在`new ResourceRef()`的地方，步入：
 
-![屏幕截图 2026-08-29 164654](/images/screenshots/屏幕截图 2026-08-29 164654.png)
+![屏幕截图 2026-08-29 164654](/images/screenshots/屏幕截图%202026-08-29%20164654.png)
 
 先分析一个各个参数的意思：
 
@@ -617,7 +617,7 @@ public class JNDIBypassHighJavaClient {
 
 这里调用的`super()`实际上调用到了`Reference`的构造方法中。后面的几个判断不需要管，和整个攻击链没什么关系。在往下看：
 
-![屏幕截图 2026-08-29 204635](/images/screenshots/屏幕截图 2026-08-29 204635.png)
+![屏幕截图 2026-08-29 204635](/images/screenshots/屏幕截图%202026-08-29%20204635.png)
 
 `StringRefAddr`是 JNDI 用来存储键值对数据，专门用来保存`Reference`对象的属性信息。`addrType`是键，`addr`是值。然后的`add()`就是把这个键值放到`Reference`里。add 之后：
 
@@ -632,13 +632,13 @@ ref (ResourceRef)
 
 然后继续添加数据，给`x`加了一个值为 EL 恶意表达式。
 
-![屏幕截图 2026-08-29 215154](/images/screenshots/屏幕截图 2026-08-29 215154.png)
+![屏幕截图 2026-08-29 215154](/images/screenshots/屏幕截图%202026-08-29%20215154.png)
 
 然后看一下这个`ReferenceWrapper`，这个类把数据进行包装之后准备通过 RMI 发送出去。
 
 然后步入整个攻击的核心。
 
-![屏幕截图 2026-08-29 215605](/images/screenshots/屏幕截图 2026-08-29 215605.png)
+![屏幕截图 2026-08-29 215605](/images/screenshots/屏幕截图%202026-08-29%20215605.png)
 
 先进行权限检查，然后看这个服务的名字有没有被占用，如果没有占用就绑定起来。
 
@@ -829,21 +829,21 @@ public class JNDIGadgetClient {
 
 跟进到`GenericURLContext#lookup()`之后再进入其中的`lookup()`：
 
-![屏幕截图 2026-08-30 155012](/images/screenshots/屏幕截图 2026-08-30 155012.png)
+![屏幕截图 2026-08-30 155012](/images/screenshots/屏幕截图%202026-08-30%20155012.png)
 
 然后再通过`p_lookup()`步入：
 
-![屏幕截图 2026-08-30 155201](/imagesscreenshots/屏幕截图 2026-08-30 155201.png)
+![屏幕截图 2026-08-30 155201](/images/screenshots/屏幕截图%202026-08-30%20155201.png)
 
-![屏幕截图 2026-08-30 161814](/images/screenshots/屏幕截图 2026-08-30 161814.png)
+![屏幕截图 2026-08-30 161814](/images/screenshots/屏幕截图%202026-08-30%20161814.png)
 
 然后步入`c_lookup()`。在`LdapCtx#c_lookup()`中有调用`Obj.decodeObject()`。这里是反序列化的核心。
 
-![屏幕截图 2026-08-30 162427](/images/screenshots/屏幕截图 2026-08-30 162427.png)
+![屏幕截图 2026-08-30 162427](/images/screenshots/屏幕截图%202026-08-30%20162427.png)
 
 跟进去，里面有一个`getURLClassLoader()`方法。
 
-![屏幕截图 2026-08-30 164444](/images/screenshots/屏幕截图 2026-08-30 164444.png)
+![屏幕截图 2026-08-30 164444](/images/screenshots/屏幕截图%202026-08-30%20164444.png)
 
 往下走进入`trustURLCodebase`的判断。
 

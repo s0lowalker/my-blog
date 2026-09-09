@@ -38,7 +38,7 @@ Apache Shiro Padding Oracle Attack 的漏洞利用必须满足如下前提条件
 
 点击 login 之后就能获取此时登录的 rememberMe 值：
 
-![2](/images/screenshots/屏幕截图 2026-08-25 215154.png)
+![2](/images/screenshots/屏幕截图%202026-08-25%20215154.png)
 
 然后用 yso 生成 URLDNS 来验证：
 

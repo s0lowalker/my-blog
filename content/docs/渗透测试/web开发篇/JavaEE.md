@@ -86,7 +86,7 @@ public class IndexServlet extends HttpServlet {
 
 ## Filter 过滤器
 
-![屏幕截图 2026-08-05 214416](D:/hugoblog/myblog/static/images/screenshots/屏幕截图 2026-08-05 214416.png)
+![屏幕截图 2026-08-05 214416](/images/screenshots/屏幕截图%202026-08-05%20214416.png)
 
 通过这一张图我们可以清楚地看到客户端访问时的数据走向。
 
