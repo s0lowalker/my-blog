@@ -1,11 +1,6 @@
 ---
-title: node.js原型链污染和沙箱逃逸漏洞学习笔记
+title: Node.js原型链污染和沙箱逃逸漏洞学习笔记
 date: 2026-03-01
-tags: [Node.js专题]
-categories: 
-  - web安全
-  - Node.js安全
-excerpt: node.js两个漏洞的基础学习
 ---
 
 # node.js原型链污染和沙箱逃逸
