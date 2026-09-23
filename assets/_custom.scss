@@ -144,7 +144,7 @@ body {
   text-overflow: ellipsis;
 }
 
-// --- 首页树形分类 ---
+// --- 首页树形分类（默认展开，可手动折叠） ---
 .homepage-tree {
   .home-tree-list {
     list-style: none;

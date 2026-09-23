@@ -12,17 +12,21 @@
 
 {{ define "home-tree" }}
   <ul class="home-tree-list">
-    {{ range (where .Section.Pages "Params.bookHidden" "ne" true) }}
-      {{ if .IsSection }}
-        <li>
-          <span class="home-tree-toggle collapsed"></span>
-          <span class="home-section-label">{{ .Title }}</span>
-          <div class="home-tree-children hidden">
-            {{ template "home-tree" (dict "Section" . "CurrentPage" $.CurrentPage) }}
-          </div>
-        </li>
-      {{ else if .Content }}
-        <li>
+    {{/* 子目录：保持原有层级与顺序（按 weight） */}}
+    {{ range (where .Section.Sections "Params.bookHidden" "ne" true) }}
+      <li class="home-tree-section">
+        <span class="home-tree-toggle expanded"></span>
+        <span class="home-section-label">{{ .Title }}</span>
+        <div class="home-tree-children">
+          {{ template "home-tree" (dict "Section" . "CurrentPage" $.CurrentPage) }}
+        </div>
+      </li>
+    {{ end }}
+
+    {{/* 文章：按日期倒序排列，新文章排在旧文章上面 */}}
+    {{ range sort (where .Section.RegularPages "Params.bookHidden" "ne" true) "Date" "desc" }}
+      {{ if .Content }}
+        <li class="home-tree-article">
           <div class="home-tree-item">
             <span class="home-tree-spacer"></span>
             <a href="{{ .RelPermalink }}" class="home-article-link" data-summary="{{ .Summary | plainify }}">{{ .Title }}</a>
