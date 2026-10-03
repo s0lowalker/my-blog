@@ -1,0 +1,10 @@
+{{- /* Render ```mermaid fenced code blocks as Mermaid diagrams. */ -}}
+{{- if not (.Page.Store.Get "mermaid") -}}
+{{- /* Include the script only once per page. */ -}}
+<script src="{{ "mermaid.min.js" | relURL }}"></script>
+{{- with resources.Get "mermaid.json" }}
+<script>mermaid.initialize({{ .Content | safeJS }})</script>
+{{- end }}
+{{- .Page.Store.Set "mermaid" true -}}
+{{- end -}}
+<pre class="mermaid">{{ .Inner }}</pre>

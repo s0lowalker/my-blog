@@ -240,3 +240,34 @@ body {
   pointer-events: none;
   display: none;
 }
+
+// --- Mermaid 图表 ---
+// 图内文字保持原始字号（配合 assets/mermaid.json 里 useMaxWidth=false），
+// 过宽的图改为容器内横向滚动，避免被整体缩小到看不清楚。
+.markdown pre.mermaid {
+  padding: 8px 0;
+  background-color: transparent;
+  border-radius: 0;
+  overflow-x: auto;
+  overflow-y: hidden;
+  scrollbar-width: thin;
+  -webkit-overflow-scrolling: touch;
+
+  // 图比容器宽时，两侧出现阴影提示「这里还能横向滚动」
+  // 原理：local 层随内容滚动、scroll 层固定，于是内容滚到头时对应一侧的阴影被盖住
+  background-image:
+    linear-gradient(to right, var(--body-background) 40%, rgba(0, 0, 0, 0)),
+    linear-gradient(to left, var(--body-background) 40%, rgba(0, 0, 0, 0)),
+    radial-gradient(farthest-side at 0 50%, rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0)),
+    radial-gradient(farthest-side at 100% 50%, rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0));
+  background-position: 0 0, 100% 0, 0 0, 100% 0;
+  background-repeat: no-repeat;
+  background-size: 28px 100%, 28px 100%, 12px 100%, 12px 100%;
+  background-attachment: local, local, scroll, scroll;
+
+  svg {
+    display: block;
+    margin: 0 auto;
+    max-width: none;
+  }
+}
