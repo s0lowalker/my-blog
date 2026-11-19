@@ -14,12 +14,23 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - name: Checkout
+        uses: actions/checkout@v4
         with:
-          submodules: true
+          submodules: true # 保持你的子模块拉取配置
+
+      # 👇 新增：安装 Dart Sass
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
           
+      - name: Install Dart Sass
+        run: npm install -g sass
+
       - name: Setup Hugo
-        uses: peaceiris/actions-hugo@v2
+        # 👇 建议升级到 v3，以消除 Node.js 20 的弃用警告
+        uses: peaceiris/actions-hugo@v3
         with:
           hugo-version: 'latest'
           extended: true
@@ -28,7 +39,8 @@ jobs:
         run: hugo --minify
         
       - name: Deploy
-        uses: peaceiris/actions-gh-pages@v3
+        # 👇 顺便升级到 v4，兼容性更好
+        uses: peaceiris/actions-gh-pages@v4
         with:
           personal_token: ${{ secrets.PERSONAL_TOKEN }}
           external_repository: s0lowalker/s0lowalker.github.io
