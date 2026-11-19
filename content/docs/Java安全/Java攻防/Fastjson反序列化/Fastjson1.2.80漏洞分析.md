@@ -58,7 +58,7 @@ public class PocDemo {
 }
 ```
 
-![屏幕截图 2026-11-18 220651](/images/screenshots/屏幕截图 2026-11-18 220651.png)
+![屏幕截图 2026-11-18 220651](/images/screenshots/屏幕截图%202026-11-18%20220651.png)
 
 成功弹出计算器。
 
@@ -68,13 +68,13 @@ public class PocDemo {
 
 跟进到下图的方法：
 
-![屏幕截图 2026-11-19 140543](/images/screenshots/屏幕截图 2026-11-19 140543.png)
+![屏幕截图 2026-11-19 140543](/images/screenshots/屏幕截图%202026-11-19%20140543.png)
 
 这里会创建一个`DefaultJSONParser`来解析我们的 JSON 字符串，然后调用`parse()`开始识别 JSON 结构，当这个方法遇到`{`的时候，知道要反序列化一个对象，然后进入`parseObject()`的逻辑。下面来看一下其中的代码实现。
 
 跟进到下图的函数：
 
-![屏幕截图 2026-11-19 141133](/images/screenshots/屏幕截图 2026-11-19 141133.png)
+![屏幕截图 2026-11-19 141133](/images/screenshots/屏幕截图%202026-11-19%20141133.png)
 
 这里看一下它的具体实现：
 
@@ -194,51 +194,51 @@ public Object parse(Object fieldName) {
 
 `lexer.token()`是当前 JSON 词法单元的类型。由于我们构造的是`{`，所以`lexer.token()`就是`LBRACE`，然后进入`parseObject()`分支。
 
-![屏幕截图 2026-11-19 141610](/images/screenshots/屏幕截图 2026-11-19 141610.png)
+![屏幕截图 2026-11-19 141610](/images/screenshots/屏幕截图%202026-11-19%20141610.png)
 
 这里先创建了一个容器对象，默认是`JSONObject`，然后调用`parseObject(object, fieldName)`，将我们传入的 JSON 内容给填充到这个`JSONObject`中。跟进到`parseObject()`中。
 
-![屏幕截图 2026-11-19 145429](/images/screenshots/屏幕截图 2026-11-19 145429.png)
+![屏幕截图 2026-11-19 145429](/images/screenshots/屏幕截图%202026-11-19%20145429.png)
 
 一直走到这。payload 中第一个键就是`@type`。再往下到`clazz = config.checkAutoType(typeName, null, lexer.getFeatures());`这一行。
 
-![屏幕截图 2026-11-19 145754](/images/screenshots/屏幕截图 2026-11-19 145754.png)
+![屏幕截图 2026-11-19 145754](/images/screenshots/屏幕截图%202026-11-19%20145754.png)
 
 这里第一次调用`checkAutoType()`，此时第二个参数是`null`，也就是`expectClass = null`。因为`java.lang.Exception`类事先被 Fastjson 保存到了缓存中，所以在处理这个类的时候直接设置`expectClass = null`。
 
-![屏幕截图 2026-11-19 151043](/images/screenshots/屏幕截图 2026-11-19 151043.png)
+![屏幕截图 2026-11-19 151043](/images/screenshots/屏幕截图%202026-11-19%20151043.png)
 
 调试的时候也能发现，`java.lang.Exception`类是直接从缓存 mapping 中取出来的，然后直接返回这个类。返回到`parseObject()`这个方法中，再往下走，走到这里：
 
-![屏幕截图 2026-11-19 151736](/images/screenshots/屏幕截图 2026-11-19 151736.png)
+![屏幕截图 2026-11-19 151736](/images/screenshots/屏幕截图%202026-11-19%20151736.png)
 
 这里获取对象反序列化器可以跟进去看一下，实际上就是经历了一系列判断，然后返回了一个`ThrowableDeserializer`对象。
 
-![屏幕截图 2026-11-19 152502](/images/screenshots/屏幕截图 2026-11-19 152502.png)
+![屏幕截图 2026-11-19 152502](/images/screenshots/屏幕截图%202026-11-19%20152502.png)
 
 然后走到`Object obj = deserializer.deserialze(this, clazz, fieldName);`这里，跟进去。
 
-![屏幕截图 2026-11-19 153405](/images/screenshots/屏幕截图 2026-11-19 153405.png)
+![屏幕截图 2026-11-19 153405](/images/screenshots/屏幕截图%202026-11-19%20153405.png)
 
 首先确定了当前处理的是一个`Throwable`类型，然后开始第二次`checkAytoType()`。
 
-![屏幕截图 2026-11-19 153725](/images/screenshots/屏幕截图 2026-11-19 153725.png)
+![屏幕截图 2026-11-19 153725](/images/screenshots/屏幕截图%202026-11-19%20153725.png)
 
 这里拿到的`key`其实是 payload 中的第二个`@type`，指向了我们的 POC。然后提取 payload 中的类名，进入`checkAutoType()`，而此时`checkAutoType()`的第二个参数是`Throwable.class`。然后对`expectClass`这个参数也就是我们传入的`Throwable.class`计算哈希，而`Throwable.class`不在黑名单中，所以会设置`expectClassFlag`为`true`，这样才能后续走到`loadClass`来加载我的恶意类。
 
-![屏幕截图 2026-11-19 155124](/images/screenshots/屏幕截图 2026-11-19 155124.png)
+![屏幕截图 2026-11-19 155124](/images/screenshots/屏幕截图%202026-11-19%20155124.png)
 
 一直到这里才开始加载我们的恶意类：
 
-![屏幕截图 2026-11-19 160804](/images/screenshots/屏幕截图 2026-11-19 160804.png)
+![屏幕截图 2026-11-19 160804](/images/screenshots/屏幕截图%202026-11-19%20160804.png)
 
 这里其实由于`expectClassFlag`为`true`，所以已经可以加载我们的恶意类了。然后跟进到`loadClass()`里看一下。
 
-![屏幕截图 2026-11-19 161421](/images/screenshots/屏幕截图 2026-11-19 161421.png)
+![屏幕截图 2026-11-19 161421](/images/screenshots/屏幕截图%202026-11-19%20161421.png)
 
 一直到这里，我们的恶意类被加载。类被加载后会被放到 Fastjson 全局缓存的地方。然后回到`ThrowableDeserializer`类中。一直走到这里才会调用我们的恶意`setter`：
 
-![屏幕截图 2026-11-19 162345](/images/screenshots/屏幕截图 2026-11-19 162345.png)
+![屏幕截图 2026-11-19 162345](/images/screenshots/屏幕截图%202026-11-19%20162345.png)
 
 通过调试时边上的变量的值我们就可以发现，这里成功执行了恶意`setter`，把`calc`命令注入进去。
 
