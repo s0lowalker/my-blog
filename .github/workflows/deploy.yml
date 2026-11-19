@@ -32,7 +32,7 @@ jobs:
         # 👇 建议升级到 v3，以消除 Node.js 20 的弃用警告
         uses: peaceiris/actions-hugo@v3
         with:
-          hugo-version: 'latest'
+          hugo-version: '0.140.0'
           extended: true
           
       - name: Build
